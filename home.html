@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Indolence of the Filipino People</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        :root {
+            --primary-color: #8b7355; /* Changed to antique brown */
+            --accent-color: #5c4c35; /* Darker brown for accents */
+            --bg-color: #f4f1ea; /* Vintage paper color */
+            --text-color: #333333;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Times New Roman', serif; /* Serif font to match the academic style */
+            background: var(--bg-color);
+            color: var(--text-color);
+            padding-top: 60px; /* Height of the navigation bar */
+        }
+
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: var(--primary-color);
+            padding: 2rem 0;
+            color: white;
+        }
+
+        .sidebar-logo {
+            text-align: center;
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-logo h2 {
+            font-family: 'Times New Roman', serif;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            display: block;
+            transition: background 0.3s;
+        }
+
+        .nav-links li a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .hero {
+            background: white;
+            padding: 3rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(162, 158, 158, 0.1);
+        }
+
+        .hero h1 {
+            font-family: 'Times New Roman', serif;
+            font-size: 3rem;
+            color: var(--primary-color);
+            letter-spacing: 1px;
+            margin: 0 0 1rem 0;
+        }
+
+        .hero p {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.2rem;
+            color: var(--text-color);
+        }
+
+        .section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .section h2 {
+            font-family: 'Times New Roman', serif;
+            letter-spacing: 1px;
+            font-size: 2rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 2rem;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .quick-link-card {
+            background: #fff;
+            border: 1px solid #8b7355;
+            padding: 25px;
+            position: relative;
+            height: 180px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .quick-link-card::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border: 1px solid #8b7355;
+            pointer-events: none;
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 25px;
+            box-sizing: border-box;
+            transition: transform 0.6s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            backface-visibility: hidden;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .card-front::after, .card-back::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9); /* Front overlay */
+            z-index: 1;
+        }
+
+        .card-back::after {
+            background: rgba(139, 115, 85, 0.9); /* Back overlay */
+        }
+
+        .card-front h3, .card-front p, .card-back p {
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-front {
+            background: #fff;
+            transform: rotateY(0deg);
+        }
+
+        .card-back {
+            background: #8b7355;
+            transform: rotateY(180deg);
+            color: #fff;
+        }
+
+        .quick-link-card:hover .card-front {
+            transform: rotateY(180deg);
+        }
+
+        .quick-link-card:hover .card-back {
+            transform: rotateY(360deg);
+        }
+
+        .card-front h3 {
+            color: #8b7355;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .card-front p {
+            color: #555;
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+            text-align: center;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .card-back p {
+            font-family: 'Times New Roman', serif;
+            text-align: center;
+            line-height: 1.6;
+            margin: 0;
+            padding: 10px;
+        }
+
+        /* Updated Hero Section Styles */
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+            background: #f4f1ea;
+            border: none;
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100vh;
+            border: none;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            background: linear-gradient(to right, rgba(139, 115, 85, 0.9), rgba(139, 115, 85, 0.7));
+            border: none;
+        }
+
+        .carousel-slide::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: 2;
+            border-right: none;
+            box-shadow: none;
+        }
+
+        .carousel-slide:nth-child(1)::before {
+            background-image: url('../images/indolen.png');
+            background-size: 80% auto;
+            background-repeat: no-repeat;
+            background-position: 50px center;
+        }
+
+        .carousel-slide:nth-child(2)::before {
+            background-image: url('../images/jose.png');
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            padding: 0 1rem;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .carousel-button {
+            background: #8b7355;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            margin-right: 30px;
+        }
+
+        .carousel-button svg {
+            width: 30px;
+            height: 30px;
+            fill: #000000;
+        }
+
+        .carousel-button:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .carousel-button {
+            pointer-events: auto;
+        }
+
+        .hero-content {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            position: relative;
+            width: 50%;
+            text-align: left;
+            margin-right: 0;
+            margin-left: auto;
+            border: none;
+            padding: 50px;
+        }
+
+        .hero-content::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border: 1px solid #8b7355;
+            pointer-events: none;
+        }
+
+        .hero-content h1 {
+            font-size: 5rem;
+            font-family: 'Times New Roman', serif;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-align: left;
+            color: #8b7355;
+        }
+
+        .hero-content h2 {
+            font-size: 2.5rem;
+            font-family: 'Times New Roman', serif;
+            margin-bottom: 2rem;
+            font-weight: normal;
+            color: #5c4c35;
+            text-align: left;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: 0;
+            margin-right: auto;
+            text-align: left;
+            color: #333;
+        }
+
+        .cta-button {
+            display: inline-block;
+            width: fit-content;
+            margin: 0;
+            padding: 1rem 2rem;
+            background-color: #8b7355;
+            color: #f4f1ea;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 1px solid #5c4c35;
+        }
+
+        .cta-button:hover {
+            background-color: #5c4c35;
+            transform: translateY(-2px);
+        }
+
+        /* Updated Content Sections */
+        .content-section {
+            background: var(--bg-color);
+            padding: 4rem 2rem;
+        }
+
+        .introduction, .biography, .website-navigation {
+            background: #fff;
+            border: 1px solid #8b7355;
+            padding: 30px;
+            margin-bottom: 40px;
+            position: relative;
+            /* Decorative frame corners */
+            background-image: 
+                linear-gradient(45deg, #8b7355 15px, transparent 15px),
+                linear-gradient(-45deg, #8b7355 15px, transparent 15px),
+                linear-gradient(135deg, #8b7355 15px, transparent 15px),
+                linear-gradient(-135deg, #8b7355 15px, transparent 15px);
+            background-position: top left, top right, bottom left, bottom right;
+            background-repeat: no-repeat;
+            background-size: 30px 30px;
+        }
+
+        .introduction::before, .biography::before, .website-navigation::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid #8b7355;
+            pointer-events: none;
+        }
+
+        .introduction h2, .biography h2, .website-navigation h2 {
+            color: #8b7355;
+            font-family: 'Times New Roman', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .introduction h2::after, .biography h2::after, .website-navigation h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: #8b7355;
+        }
+
+        .introduction p, .biography p {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #333;
+            text-align: justify;
+            margin: 20px 0;
+        }
+
+        /* Updated Navigation Bar */
+        .navigation-bar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: #f4f1ea;
+            padding: 1rem 2rem 0.5rem 0.5rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-bottom: 1px solid #8b7355;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #8b7355;
+            margin-right: 4rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: #8b7355;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            position: relative;
+        }
+
+        .nav-links li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: #8b7355;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links li a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links li a.active {
+            color: #5c4c35;
+        }
+
+        .nav-links li a.active::after {
+            width: 100%;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            font-weight: normal;
+            margin-bottom: 2rem;
+        }
+
+        /* Update HTML for the cards to include background images */
+        .mystery-papers .card-front, .mystery-papers .card-back {
+            background-image: url('../images/rand_paper.webp');
+        }
+
+        .unfinished-novel .card-front, .unfinished-novel .card-back {
+            background-image: url('../images/old_novel.jpg');
+        }
+
+        .pancit .card-front, .pancit .card-back {
+            background-image: url('../images/old_pancit.jpg');
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navigation-bar">
+        <div class="logo">The Indolence Of The Filipino</div>
+        <ul class="nav-links">
+            <li><a href="home.html" class="active">Home</a></li>
+            <li><a href="works.html">Works</a></li>
+            <li><a href="analysis.html">Analysis</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="resources.html">Resources</a></li>
+        </ul>
+    </nav>
+
+
+    <!-- Updated Hero Section -->
+    <section class="hero-section">
+        <div class="carousel">
+            <!-- First Slide (formerly second slide) -->
+            <div class="carousel-slide">
+                <div class="hero-content">
+                    <h1>The Indolence of the Filipino People</h1>
+                    <h2>José Rizal</h2>
+                    <p>"The Indolence of the Filipino People" (1890) by José Rizal argues that Filipino "laziness" is a result of Spanish oppression, poor governance, and lack of opportunities, not natural traits. He calls for reforms to restore productivity and progress.</p>
+                    <a href="works.html" class="cta-button">Explore Works</a>
+                </div>
+            </div>
+            
+            <!-- Second Slide (formerly first slide) -->
+            <div class="carousel-slide">
+                <div class="hero-content">
+                    <h1>JOSÉ RIZAL</h1>
+                    <h2>José Protacio Rizal Mercado y Alonzo Realonda</h2>
+                    <p>Jose Rizal, a man of intellect and patriotism, 
+                        challenged the idea that Filipinos were naturally indolent.
+                        In The Indolence of the Filipino People, he argued that colonial oppression, 
+                        not laziness, hindered progress. His writings continue to inspire Filipinos 
+                        to rise above passivity and strive for national advancement</p>
+                    <a href="#content" class="cta-button">Read More</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Arrows -->
+        <div class="carousel-nav">
+            <button class="carousel-button next" style="margin-left: auto;">
+                <svg viewBox="0 0 24 24">
+                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                </svg>
+            </button>
+        </div>
+    </section>
+
+    <!-- Content Sections -->
+    <div id="content" class="content-section">
+        <section class="introduction">
+            <h2>Welcome to Rizal's Legacy</h2>
+            <p>Discover the profound impact of José Rizal's works and his visionary thoughts on Philippine nationalism, social reform, and freedom. His writings, including his most influential essays like "The Indolence of the Filipino People", continue to inspire generations. Our comprehensive collection of resources delves into Rizal's intellectual and political contributions, his advocacy for peaceful reform, and the lasting influence of his literary works on the fight for Filipino identity and independence. Explore his legacy and uncover the timeless relevance of his ideals in shaping a just and progressive society.</p>
+        </section>
+
+        <section class="biography">
+            <h2>About José Rizal</h2>
+            <p>José Rizal (1861 & 1896) was a Filipino nationalist, polymath, and reformist whose intellectual pursuits and writings ignited the movement against Spanish colonial oppression. Born into a well-off principalia family in Calamba, Laguna, he displayed exceptional intellect from a young age, excelling in medicine, literature, and linguistics. His education in the Philippines and Europe shaped his advocacy for peaceful reforms, leading to the publication of <em>Noli Me Tangere</em> (1887) and <em>El Filibusterismo</em> (1891), which exposed the injustices of Spanish rule. While in Europe, he became actively involved in the <strong>Propaganda Movement</strong>, joining <em>La Solidaridad</em> and Masonic circles to push for political and social reforms.</p>  
+        
+            <p>Despite warnings, Rizal returned to the Philippines, where he founded <strong>La Liga Filipina</strong>, an organization advocating peaceful change. However, his nationalist ideals led to his exile in Dapitan, where he continued his work as a teacher, doctor, and community leader. As tensions escalated, he was accused of inciting rebellion and executed on <strong>December 30, 1896</strong>. His martyrdom became a catalyst for the <strong>Philippine Revolution</strong>, and his legacy continues to inspire movements for education, freedom, and national dignity. Rizal's life serves as a testament to the power of knowledge, unity, and resilience in the pursuit of justice.</p>
+        </section>
+        
+
+        <section class="website-navigation">
+            <h2>Did You Know?</h2>
+            <div class="quick-links">
+                <div class="quick-link-card mystery-papers">
+                    <div class="card-front">
+                        <h3>Mystery Papers</h3>
+                        <p>Rizal stuffed unknown papers in his pockets and shoes on the eve of his execution.</p>
+                    </div>
+                    <div class="card-back">
+                        <p>On December 30, 1896, before facing the firing squad, Rizal secretly hid documents in his shoes and pockets. The contents of these papers remain a mystery to this day, adding to the intrigue of his final moments.</p>
+                    </div>
+                </div>
+                <div class="quick-link-card unfinished-novel">
+                    <div class="card-front">
+                        <h3>Unfinished Novel</h3>
+                        <p>Rizal left an unfinished novel manuscript before his death</p>
+                    </div>
+                    <div class="card-back">
+                        <p>Before his execution, Rizal was working on what could have been his third novel. This unfinished manuscript held potential insights into his final thoughts and visions for the Philippines.</p>
+                    </div>
+                </div>
+                <div class="quick-link-card pancit">
+                    <div class="card-front">
+                        <h3>Pancit</h3>
+                        <p>A traditional Filipino dish that Rizal enjoyed during his lifetime</p>
+                    </div>
+                    <div class="card-back">
+                        <p>Pancit, a cherished Filipino dish, was among Rizal's favorite foods. A popular Filipino dish of stir-fried noodles with vegetables, meat, and other ingredients. Rizal enjoyed eating pancit with fellow Filipino students in Madrid.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const carousel = document.querySelector('.carousel');
+        const slides = document.querySelectorAll('.carousel-slide');
+        const nextButton = document.querySelector('.carousel-button.next');
+        let currentSlide = 0;
+
+        function updateCarousel() {
+            carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+
+        nextButton.addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateCarousel();
+        });
+    </script>
+</body>
+</html> 
