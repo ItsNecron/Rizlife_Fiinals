@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rizal's Legacy - Works</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        :root {
+            --primary-color: #8b7355; /* Antique brown */
+            --accent-color: #5c4c35; /* Darker brown */
+            --bg-color: #f4f1ea; /* Vintage paper */
+            --text-color: #333333;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Times New Roman', serif; /* Serif font to match the academic style */
+            background: var(--bg-color);
+            color: var(--text-color);
+            padding-top: 60px; /* Height of the navigation bar */
+        }
+
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: var(--primary-color);
+            padding: 2rem 0;
+            color: white;
+        }
+
+        .sidebar-logo {
+            text-align: center;
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-logo h2 {
+            font-family: 'Times New Roman', serif;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            display: block;
+            transition: background 0.3s;
+        }
+
+        .nav-links li a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .hero {
+            background: white;
+            padding: 3rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .section h2 {
+            font-family: 'Times New Roman', serif;
+            letter-spacing: 1px;
+            font-size: 2rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .quick-link-card {
+            background: var(--primary-color);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: transform 0.3s;
+            border: 1px solid var(--accent-color);
+        }
+
+        .quick-link-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* New Hero Section Styles */
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .scroll-indicator span {
+            margin-top: 0.5rem;
+        }
+
+        /* Content Sections */
+        .content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .navigation-bar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: #f4f1ea;
+            padding: 1rem 2rem 0.5rem 0.5rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-bottom: 1px solid #8b7355;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #8b7355;
+            margin-right: 4rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: #8b7355;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            position: relative;
+        }
+
+        .nav-links li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: #8b7355;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links li a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links li a.active {
+            color: #5c4c35;
+        }
+
+        .nav-links li a.active::after {
+            width: 100%;
+        }
+
+        .nav-links li a:hover {
+            color: #5c4c35;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            color: #8b7355;
+            font-weight: normal;
+            margin-bottom: 2rem;
+        }
+        /* Carousel Wrapper */
+        .multimedia-carousel {
+            position: relative;
+            max-width: 900px;
+            height: 600px;
+            margin: auto;
+            overflow: hidden;
+            background: #fff;
+            padding: 30px;
+            border: 1px solid #8b7355;
+        }
+
+        /* Slide Container */
+        .multimedia-container {
+            position: relative;
+            width: 100%;
+            height: 400px; /* Adjust height based on content */
+        }
+
+        /* Slide Default (All Slides in Place) */
+        .media-slide {
+            position: absolute;
+            width: 100%;
+            height: 150%;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+        }
+
+        /* First Slide Always Visible */
+        .media-slide.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Exit Left Animation */
+        .media-slide.exiting {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+
+        /* Entering from Right */
+        .media-slide.entering {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+
+        /* Image Styling */
+        .media-slide img {
+            width: 100%;  /* Responsive width */
+            max-width: 400px;  /* Limits the max size */
+            height: auto;  /* Maintain aspect ratio */
+            border-radius: 10px;
+            object-fit: cover;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+            display: block;
+            margin: auto;
+            border: 1px solid #8b7355;
+        }
+
+        /* Video Styling */
+        .media-slide video {
+            width: 85%;
+            height: 90%;
+            border-radius: 10px;
+            object-fit: contain; /* Ensures the entire video is visible */
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            display: block;
+            margin: auto;
+        }
+
+        /* Caption Styling */
+        .media-caption {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            color: #fff;
+            background: rgba(139, 115, 85, 0.9);
+            padding: 5px;
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+        }
+
+        /* Navigation Buttons */
+        button.prev, button.next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(139, 115, 85, 0.8);
+            color: #f4f1ea;
+            border: 1px solid #f4f1ea;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 20px;
+            border-radius: 50%;
+            z-index: 10;
+            width: 40px;
+            height: 40px;
+            transition: all 0.3s ease;
+        }
+
+        button.prev { left: 10px; }
+        button.next { right: 10px; }
+
+        button:hover {
+            background-color: #5c4c35;
+            transform: scale(1.1);
+        }
+
+        /* Work Cards Styling */
+        .work-card {
+            background: #fff;
+            border: 1px solid #8b7355;
+            padding: 30px;
+            margin-bottom: 30px;
+            position: relative;
+            /* Decorative frame corners */
+            background-image: 
+                linear-gradient(45deg, #8b7355 15px, transparent 15px),
+                linear-gradient(-45deg, #8b7355 15px, transparent 15px),
+                linear-gradient(135deg, #8b7355 15px, transparent 15px),
+                linear-gradient(-135deg, #8b7355 15px, transparent 15px);
+            background-position: top left, top right, bottom left, bottom right;
+            background-repeat: no-repeat;
+            background-size: 30px 30px;
+        }
+
+        .work-card::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid #8b7355;
+            pointer-events: none;
+        }
+
+        .work-card h3 {
+            color: #8b7355;
+            font-family: 'Times New Roman', serif;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .work-meta {
+            color: #5c4c35;
+            font-style: italic;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .context, .summary {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(139, 115, 85, 0.05);
+        }
+
+        .context h4, .summary h4 {
+            color: #8b7355;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .context p, .summary p {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #333;
+            text-align: justify;
+        }
+
+        /* Read More Button */
+        .read-more {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #8b7355;
+            color: #f4f1ea;
+            text-decoration: none;
+            border: 1px solid #5c4c35;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .read-more:hover {
+            background: #5c4c35;
+            transform: translateY(-2px);
+        }
+
+        /* Section Headers */
+        .section {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: #fff;
+            border: 1px solid #8b7355;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: #8b7355;
+        }
+
+        /* Add these new styles */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background: white;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 8px;
+            padding: 30px;
+            position: relative;
+        }
+
+        .close-popup {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #333;
+        }
+
+        .popup-content h3 {
+            color: #8b7355;
+            margin-bottom: 1rem;
+        }
+
+        .popup-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .popup-section h4 {
+            color: #5c4c35;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Add these new grid layout styles */
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .work-item {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .work-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .work-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .work-info {
+            padding: 15px;
+        }
+
+        .work-info h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .work-stats {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 10px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Update container styles */
+        .page-container {
+            max-width: 95%; /* Much wider container */
+            margin: 40px auto;
+            padding: 60px;
+            position: relative;
+            background-color: #f4f1ea; /* Light beige background */
+        }
+
+        /* Add an irregular border container */
+        .irregular-border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 1px solid #8b7355;
+            margin: 20px; /* Space for the border from edge */
+            pointer-events: none; /* Allows clicking through to content */
+            z-index: 0;
+        }
+
+        .corner-decoration {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: #8b7355;
+            z-index: 2;
+        }
+
+        /* Update corner positions to align with border */
+        .corner-tl {
+            top: 20px;
+            left: 20px;
+            clip-path: polygon(0 0, 100% 0, 0 100%);
+        }
+
+        .corner-tr {
+            top: 20px;
+            right: 20px;
+            clip-path: polygon(100% 0, 0 0, 100% 100%);
+        }
+
+        .corner-bl {
+            bottom: 20px;
+            left: 20px;
+            clip-path: polygon(0 100%, 0 0, 100% 100%);
+        }
+
+        .corner-br {
+            bottom: 20px;
+            right: 20px;
+            clip-path: polygon(100% 100%, 0 100%, 100% 0);
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+            padding: 60px;
+            min-height: calc(100vh - 180px);
+            background-color: white;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Update work grid for wider container */
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Update category navigation styles */
+        .category-nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px 0;
+            background-color: white;
+            max-width: 80%;
+            margin: 0 auto;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .category-btn {
+            background: none;
+            border: none;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.5rem;
+            color: #8b7355;
+            cursor: pointer;
+            padding: 5px 2px;
+            transition: all 0.3s ease;
+            position: relative;
+            text-transform: capitalize;
+        }
+
+        .category-btn::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 50%;
+            background-color: #8b7355;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .category-btn:hover::after,
+        .category-btn.active::after {
+            width: 100%;
+        }
+
+        .category-btn.active {
+            color: #5c4c35;
+        }
+
+        .category-btn.active::after {
+            width: 100%;
+            height: 1px;
+            background-color: #8b7355;
+        }
+
+        /* Update work items to include category data */
+        .work-item {
+            display: none; /* Hide by default */
+        }
+
+        .work-item.show {
+            display: block; /* Show when filtered */
+        }
+
+        .carousel-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 100%;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            position: relative;
+            background-color: #f4f1ea;
+        }
+
+
+        .carousel-slide {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        /* Add specific styling for discovery items if needed */
+        .work-item[data-category="discoveries"] .work-meta {
+            color: #5c4c35;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navigation-bar">
+        <div class="logo">The Indolence Of The Filipino</div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="works.html" class="active">Works</a></li>
+            <li><a href="analysis.html">Analysis</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="resources.html">Resources</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1></h1>
+        </div>
+        <a href="#content" class="scroll-indicator">
+            SCROLL
+            <span>↓</span>
+        </a>
+    </section>
+
+    <!-- Content Sections -->
+
+    <script>
+        document.querySelector('.scroll-indicator').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('#content').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        });
+    </script>
+
+    <section id="content">
+        <div class="page-container">
+            <!-- Add irregular border container -->
+            <div class="irregular-border"></div>
+            
+            <!-- Decorative corners -->
+            <div class="corner-decoration corner-tl"></div>
+            <div class="corner-decoration corner-tr"></div>
+            <div class="corner-decoration corner-bl"></div>
+            <div class="corner-decoration corner-br"></div>
+            
+            <div class="content-wrapper">
+                <!-- Add category navigation -->
+                <div class="category-nav">
+                    <button class="category-btn active" data-category="all">All</button>
+                    <button class="category-btn" data-category="paintings">Paintings</button>
+                    <button class="category-btn" data-category="literatures">Literatures</button>
+                    <button class="category-btn" data-category="sculptures">Sculptures</button>
+                    <button class="category-btn" data-category="discoveries">Discoveries</button>
+                </div>
+                
+                <div class="work-grid">
+                    <div class="work-item" data-work="noli" data-category="literatures">
+                        <img src="../images/noli.jpg" alt="Noli Me Tángere Manuscript">
+                        <div class="work-info">
+                            <h3>Noli Me Tángere</h3>
+                            <div class="work-meta">
+                                1887    Novel
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="work-item" data-work="fili" data-category="literatures">
+                        <img src="../images/el-fili-cover.jpg" alt="El Filibusterismo Manuscript">
+                        <div class="work-info">
+                            <h3>El Filibusterismo</h3>
+                            <div class="work-meta">
+                                1891    Novel
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="work-item" data-work="adios" data-category="literatures">
+                        <img src="../images/adios.jpg" alt="Mi último adiós Manuscript">
+                        <div class="work-info">
+                            <h3>Mi último adiós</h3>
+                            <div class="work-meta">
+                                1896    Novel
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="work-item" data-work="makamisa" data-category="literatures">
+                        <img src="../images/makisama.jpg" alt="Makamisa Manuscript">
+                        <div class="work-info">
+                            <h3>Makamisa</h3>
+                            <div class="work-meta">
+                                Novel
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Replace the painting items inside the work-grid div -->
+                    <div class="work-item" data-work="josephine-sleeping" data-category="sculptures">
+                        <img src="../images/sleeping.jpg" alt="JOSEPHINE SLEEPING">
+                        <div class="work-info">
+                            <h3>JOSEPHINE SLEEPING</h3>
+                            <div class="work-meta">
+                                1895    Sculpture
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="work-item" data-work="dapitan" data-category="paintings">
+                        <img src="../images/rizal_dapitan_church_curtains.webp" alt="Dapitan Church Curtains">
+                        <div class="work-info">
+                            <h3>Dapitan Church Curtains</h3>
+                            <div class="work-meta">
+                                1892    Painting
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="work-item" data-work="pearl" data-category="paintings">
+                        <img src="../images/images.jpg" alt="Mother-of-pearl Painting">
+                        <div class="work-info">
+                            <h3>A painting on a pair of mother-of-pearl</h3>
+                            <div class="work-meta">
+                                1894    Painting
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="work-item" data-work="spanish" data-category="paintings">
+                        <img src="../images/spanish.jpg" alt="Spanish Coat of Arms">
+                        <div class="work-info">
+                            <h3>Spanish coat of arms</h3>
+                            <div class="work-meta">
+                                1892    Painting
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="work-item" data-work="allegory" data-category="paintings">
+                        <img src="../images/allegory-on-a-pair.jpg" alt="Allegory on Porcelain Bases">
+                        <div class="work-info">
+                            <h3>Allegory on a pair of porcelain bases of the new year celebration</h3>
+                            <div class="work-meta">
+                                1895    Painting
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add these sculpture items inside the work-grid div -->
+                    <div class="work-item" data-work="dapitan-girl" data-category="sculptures">
+                        <img src="../images/dapitangirl.jpg" alt="Model head of a Dapitan girl">
+                        <div class="work-info">
+                            <h3>Model head of a Dapitan girl</h3>
+                            <div class="work-meta">
+                                1892    Sculpture
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="work-item" data-work="sacred-heart" data-category="sculptures">
+                        <img src="../images/jesus.jpg" alt="Sacred heart of Jesus">
+                        <div class="work-info">
+                            <h3>Sacred heart of Jesus</h3>
+                            <div class="work-meta">
+                                1893    Sculpture
+                            </div>
+                        </div>
+                    </div>
+
+                
+
+                    <div class="work-item" data-work="mothers-revenge" data-category="sculptures">
+                        <img src="../images/revenge.jpg" alt="Mother's Revenge">
+                        <div class="work-info">
+                            <h3>Mother's Revenge</h3>
+                            <div class="work-meta">
+                                1894    Sculpture
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="work-item" data-work="josephine" data-category="sculptures">
+                        <img src="../images/Josephine_Bracken_wood_carving.jpg" alt="Josephine Bracken medallion">
+                        <div class="work-info">
+                            <h3>Josephine Bracken (medallion)</h3>
+                            <div class="work-meta">
+                                1895    Sculpture
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add these discovery items inside the work-grid div -->
+                    <div class="work-item" data-work="draco" data-category="discoveries">
+                        <img src="../images/draco.jpg" alt="Draco Rizali">
+                        <div class="work-info">
+                            <h3>Draco Rizali</h3>
+                            <div class="work-meta">
+                                1872    Discovery
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="work-item" data-work="apogania" data-category="discoveries">
+                        <img src="../images/apogonia.jpg" alt="Apogania Rizali">
+                        <div class="work-info">
+                            <h3>Apogania Rizali</h3>
+                            <div class="work-meta">
+                                1893    Discovery
+                            </div>
+                        </div>
+                    </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="popup-overlay" id="workPopup">
+        <div class="popup-content">
+            <span class="close-popup">&times;</span>
+            <h3 id="popupTitle"></h3>
+            <div class="popup-section">
+                <h4>Historical Context</h4>
+                <p id="popupContext"></p>
+            </div>
+            <div class="popup-section">
+                <h4>Plot Summary</h4>
+                <p id="popupSummary"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentIndex = 0;
+        const slides = document.querySelectorAll(".media-slide");
+        
+        function changeSlide(direction) {
+            let currentSlide = slides[currentIndex];
+        
+            // Remove active class and add exiting animation
+            currentSlide.classList.remove("active");
+            currentSlide.classList.add("exiting");
+        
+            setTimeout(() => {
+                currentSlide.classList.remove("exiting"); // Remove exit animation
+        
+                // Calculate new index
+                currentIndex = (currentIndex + direction + slides.length) % slides.length;
+        
+                let newSlide = slides[currentIndex];
+                newSlide.classList.add("entering");
+        
+                setTimeout(() => {
+                    newSlide.classList.remove("entering");
+                    newSlide.classList.add("active");
+                }, 100); // Delay matches CSS transition time
+            }, 500);
+        }
+        
+        // Initialize first slide as active (static)
+        document.addEventListener("DOMContentLoaded", () => {
+            slides[currentIndex].classList.add("active");
+        });
+
+        const workData = {
+            'noli': {
+                title: 'Noli Me Tángere',
+                category: 'literatures',
+                year: '1887',
+                type: 'Novel',
+                context: `Written during the height of Spanish colonization in the Philippines, this novel was published in 1887 in Berlin. Rizal wrote it in Spanish to reach both Filipino and Spanish readers, aiming to expose the social injustices and political tyranny during the colonial period.`,
+                summary: `The story follows Juan Crisóstomo Ibarra, a young Filipino who returns home after studying in Europe. He finds his homeland under the oppressive Spanish colonial regime, with corruption deeply rooted in both church and state.`
+            },
+            'fili': {
+                title: 'El Filibusterismo',
+                category: 'literatures',
+                year: '1891',
+                type: 'Novel',
+                context: `Published in 1891 as a sequel to Noli Me Tángere, this darker novel was written during Rizal's time in Europe. It reflects his growing disillusionment with the possibility of peaceful reform under Spanish rule.`,
+                summary: `The novel follows Crisóstomo Ibarra, now transformed into the mysterious jeweler Simoun, as he returns to the Philippines seeking revenge.`
+            },
+            'adios': {
+                title: 'Mi último adiós',
+                category: 'literatures',
+                year: '1896',
+                type: 'Novel',
+                context: `Written on the eve of his execution, this poem is considered Rizal's farewell message to his country.`,
+                summary: `A powerful and moving farewell poem expressing Rizal's love for the Philippines and his acceptance of his fate.`
+            },
+            'makamisa': {
+                title: 'Makamisa',
+                category: 'literatures',
+                type: 'Novel',
+                context: `An unfinished work that was discovered among Rizal's papers, written in Tagalog.`,
+                summary: `The story revolves around the corruption of religious authorities in a small Philippine town.`
+            },
+            'josephine-sleeping': {
+                title: 'JOSEPHINE SLEEPING',
+                category: 'sculptures',
+                year: '1895',
+                type: 'Sculpture',
+                context: `A tender sculpture created by Rizal depicting Josephine Bracken in peaceful repose. This intimate work was created during their time together in Dapitan.`,
+                summary: `This sculpture reveals Rizal's personal life and his ability to capture quiet, intimate moments. It shows his skill in sculptural portraiture and his deep affection for Josephine Bracken.`
+            },
+            'dapitan': {
+                title: 'Dapitan Church Curtains',
+                category: 'paintings',
+                year: '1892',
+                type: 'Painting',
+                context: `Created during his exile in Dapitan, these curtain designs showcase Rizal's artistic versatility and his contributions to the local church.`,
+                summary: `The curtains feature intricate designs that blend religious and cultural elements, demonstrating Rizal's artistic skills applied to practical purposes.`
+            },
+            'pearl': {
+                title: 'A painting on a pair of mother-of-pearl',
+                category: 'paintings',
+                year: '1894',
+                type: 'Painting',
+                context: `This delicate work showcases Rizal's mastery of different mediums, particularly his ability to paint on unusual surfaces like mother-of-pearl.`,
+                summary: `The painting demonstrates Rizal's technical skill and attention to detail, working on a challenging medium that requires precise handling.`
+            },
+            'spanish': {
+                title: 'Spanish coat of arms',
+                category: 'paintings',
+                year: '1892',
+                type: 'Painting',
+                context: `A detailed rendering of the Spanish coat of arms, showing Rizal's technical precision and understanding of heraldic art.`,
+                summary: `This work demonstrates Rizal's ability to create accurate and detailed representations of official symbols and emblems.`
+            },
+            'allegory': {
+                title: 'Allegory on a pair of porcelain bases of the new year celebration',
+                category: 'paintings',
+                year: '1895',
+                type: 'Painting',
+                context: `An allegorical painting created on porcelain bases, showcasing Rizal's ability to work with various materials and his symbolic artistic expression.`,
+                summary: `This piece combines decorative art with symbolic meaning, demonstrating Rizal's artistic versatility and his ability to infuse meaning into decorative objects.`
+            },
+            'dapitan-girl': {
+                title: 'Model head of a Dapitan girl',
+                category: 'sculptures',
+                year: '1892',
+                type: 'Sculpture',
+                context: `Created during his exile in Dapitan, this sculpture captures the features of a local girl, demonstrating Rizal's keen observation of the people around him.`,
+                summary: `This clay model shows Rizal's skill in three-dimensional portraiture and his interest in capturing the essence of Filipino beauty.`
+            },
+            'sacred-heart': {
+                title: 'Sacred heart of Jesus',
+                category: 'sculptures',
+                year: '1893',
+                type: 'Sculpture',
+                context: `A religious sculpture created during his time in Dapitan, showing his respect for religious imagery despite his criticisms of the church as an institution.`,
+                summary: `This piece demonstrates Rizal's ability to create devotional art with reverence and skill.`
+            },
+            'composite': {
+                title: 'Composite Statuette',
+                category: 'sculptures',
+                year: '1894',
+                type: 'Sculpture',
+                context: `A unique piece that combines different elements and styles, showcasing Rizal's experimental approach to sculpture.`,
+                summary: `This statuette demonstrates Rizal's ability to blend various artistic influences into a cohesive work.`
+            },
+            'mothers-revenge': {
+                title: 'Mother\'s Revenge',
+                category: 'sculptures',
+                year: '1894',
+                type: 'Sculpture',
+                context: `A dramatic sculpture depicting a powerful emotional narrative, created during his exile in Dapitan.`,
+                summary: `This piece shows Rizal's ability to convey complex emotions and narratives through sculptural form.`
+            },
+            'josephine': {
+                title: 'Josephine Bracken (medallion)',
+                category: 'sculptures',
+                year: '1895',
+                type: 'Sculpture',
+                context: `A medallion portrait of Josephine Bracken, Rizal's last romantic partner whom he met during his exile in Dapitan.`,
+                summary: `This intimate piece captures Rizal's personal life and his skill in creating detailed portrait medallions.`
+            },
+            'draco': {
+                title: 'Draco Rizali',
+                category: 'discoveries',
+                year: '1872',
+                type: 'Discovery',
+                context: `A species of flying lizard discovered in Mindanao and named after José Rizal. This discovery showcases Rizal's contributions to natural science and zoology.`,
+                summary: `This flying lizard species was named in honor of Rizal's scientific work and his contributions to Philippine natural history.`
+            },
+            'apogania': {
+                title: 'Apogania Rizali',
+                category: 'discoveries',
+                year: '1893',
+                type: 'Discovery',
+                context: `A species of beetle discovered during Rizal's exile in Dapitan. This discovery demonstrates his keen interest in entomology and his scientific observations during his exile.`,
+                summary: `This beetle species was named after Rizal in recognition of his contributions to the field of entomology and natural science.`
+            },
+            'rhacophorus': {
+                title: 'Rhacophorus Rizali',
+                category: 'discoveries',
+                year: '1894',
+                type: 'Discovery',
+                context: `A species of frog discovered in the Philippines and named in honor of José Rizal. This discovery highlights his contributions to Philippine herpetology.`,
+                summary: `This tree frog species was named after Rizal, recognizing his work in documenting and studying Philippine wildlife.`
+            }
+        };
+
+        document.querySelectorAll('.work-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const workId = this.dataset.work;
+                const work = workData[workId];
+                
+                if (work) {
+                    document.getElementById('popupTitle').textContent = work.title;
+                    document.getElementById('popupContext').textContent = work.context;
+                    document.getElementById('popupSummary').textContent = work.summary;
+                    document.getElementById('workPopup').style.display = 'flex';
+                }
+            });
+        });
+
+        document.querySelector('.close-popup').addEventListener('click', function() {
+            document.getElementById('workPopup').style.display = 'none';
+        });
+
+        document.getElementById('workPopup').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.style.display = 'none';
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            const workItems = document.querySelectorAll('.work-item');
+
+            // Add category filtering
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    // Add active class to clicked button
+                    btn.classList.add('active');
+
+                    const category = btn.dataset.category;
+
+                    // Show/hide items based on category
+                    workItems.forEach(item => {
+                        const itemCategory = workData[item.dataset.work]?.category;
+                        if (category === 'all' || category === itemCategory) {
+                            item.classList.add('show');
+                        } else {
+                            item.classList.remove('show');
+                        }
+                    });
+                });
+            });
+
+            // Show all items by default
+            workItems.forEach(item => item.classList.add('show'));
+        });
+    </script>
+
+    <!-- Add SVG filter for irregular border effect -->
+    <svg style="position: absolute; width: 0; height: 0;" aria-hidden="true" focusable="false">
+        <filter id="irregular">
+            <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="3" result="noise"/>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" />
+        </filter>
+    </svg>
+
+    <!-- Add this to your HTML structure -->
+    <div class="carousel-container">
+        <div class="carousel">
+            <!-- First slide -->
+            <div class="carousel-slide">
+                <div class="hero-content">
+                    <h1>The Indolence of the Filipino People</h1>
+                    <h2>José Rizal</h2>
+                    <p>"The Indolence of the Filipino People" (1890) by José Rizal argues that Filipino "laziness" is a result of Spanish oppression, poor governance, and lack of opportunities, not natural traits. He calls for reforms to restore productivity and progress.</p>
+                    <a href="#works" class="cta-button">Explore Works</a>
+                </div>
+            </div>
+
+            <!-- Second slide -->
+            <div class="carousel-slide">
+                <div class="hero-content">
+                    <h1>Noli Me Tángere</h1>
+                    <h2>José Rizal</h2>
+                    <p>A social commentary on Spanish colonial rule in the Philippines, exposing the corruption, abuse, and discrimination during that period.</p>
+                    <a href="#noli" class="cta-button">Learn More</a>
+                </div>
+            </div>
+
+            <!-- Third slide -->
+            <div class="carousel-slide">
+                <div class="hero-content">
+                    <h1>El Filibusterismo</h1>
+                    <h2>José Rizal</h2>
+                    <p>The sequel to Noli Me Tángere, depicting the darker themes of revenge, revolution, and the consequences of oppression.</p>
+                    <a href="#fili" class="cta-button">Discover</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.querySelector('.carousel');
+            const slides = document.querySelectorAll('.carousel-slide');
+            let currentSlide = 0;
+            const slideCount = slides.length;
+            const slideInterval = 4000; // 4 seconds
+            
+            // Set initial position
+            updateCarousel();
+            
+            // Start automatic sliding
+            let slideTimer = setInterval(nextSlide, slideInterval);
+            
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slideCount;
+                updateCarousel();
+            }
+            
+            function updateCarousel() {
+                carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+            }
+            
+            // Pause on hover (optional)
+            carousel.addEventListener('mouseenter', () => {
+                clearInterval(slideTimer);
+            });
+            
+            carousel.addEventListener('mouseleave', () => {
+                slideTimer = setInterval(nextSlide, slideInterval);
+            });
+        });
+    </script>
+</body>
+</html> 
+    
+    

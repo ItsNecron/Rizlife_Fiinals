@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rizal's Legacy - Gallery</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        :root {
+            --primary-color: #0038A8; /* Deep blue like NYHS */
+            --accent-color: #333333; /* Dark gray for accents */
+            --bg-color: #FFFFFF; /* White background */
+            --text-color: #333333; /* Dark gray text */
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Times New Roman', serif; /* Serif font to match the academic style */
+            background: var(--bg-color);
+            color: var(--text-color);
+            padding-top: 60px; /* Height of the navigation bar */
+        }
+
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: var(--primary-color);
+            padding: 2rem 0;
+            color: white;
+        }
+
+        .sidebar-logo {
+            text-align: center;
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-logo h2 {
+            font-family: 'Times New Roman', serif;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            display: block;
+            transition: background 0.3s;
+        }
+
+        .nav-links li a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .hero {
+            background: #fff;
+            border: 2px solid #8b7355;
+            padding: 3rem;
+            border-radius: 0; /* Remove modern rounded corners */
+            margin-bottom: 2rem;
+            position: relative;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid #8b7355;
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-family: 'Times New Roman', serif;
+            font-size: 3.5rem;
+            color: #8b7355;
+            letter-spacing: 2px;
+            margin: 0 0 1rem 0;
+            text-align: center;
+        }
+
+        .hero p {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.3rem;
+            color: #333;
+            font-style: italic;
+            text-align: center;
+        }
+
+        .section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .section h2 {
+            font-family: 'Times New Roman', serif;
+            letter-spacing: 1px;
+            font-size: 2rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .quick-link-card {
+            background: var(--primary-color);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: transform 0.3s;
+            border: 1px solid var(--accent-color);
+        }
+
+        .quick-link-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* New Hero Section Styles */
+
+
+       
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .scroll-indicator span {
+            margin-top: 0.5rem;
+        }
+
+        /* Content Sections */
+        .content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .navigation-bar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: #f4f1ea;
+            padding: 1rem 2rem 0.5rem 0.5rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-bottom: 1px solid #8b7355;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #8b7355;
+            margin-right: 4rem;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: #8b7355;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            position: relative;
+        }
+
+        .nav-links li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: #8b7355;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links li a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links li a.active {
+            color: #5c4c35;
+        }
+
+        .nav-links li a.active::after {
+            width: 100%;
+        }
+
+        .nav-links li a:hover {
+            color: #5c4c35;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            font-weight: normal;
+            margin-bottom: 2rem;
+        }
+        /* ===== General Section Styling ===== */
+        .section {
+            width: 100%; /* Prevents overflow */
+            max-width: 1900px; /* Keeps content within a proper width */
+            margin: auto;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        /* Updated Gallery Grid Layout */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 60px; /* Increased gap between items */
+            padding: 60px; /* Increased padding around grid */
+            background: #f4f1ea;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        /* Updated Gallery Item Styles */
+        .gallery-item {
+            position: relative;
+            background: #fff;
+            border: 1px solid #8b7355;
+            padding: 15px;
+            margin-bottom: 20px;
+            height: fit-content;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 300px; /* Fixed height for consistency */
+            object-fit: cover;
+            margin: 0; /* Reset margins */
+            border: 1px solid #8b7355;
+            filter: sepia(20%);
+            transition: filter 0.3s ease;
+        }
+
+        .gallery-caption {
+            position: relative; /* Changed from absolute to relative */
+            bottom: auto; /* Remove absolute positioning */
+            left: auto;
+            right: auto;
+            padding: 15px;
+            background: #f4f1ea;
+            color: #333;
+            transform: none; /* Remove transform */
+            margin-top: 10px; /* Add space between image and caption */
+        }
+
+        .gallery-caption h3 {
+            margin: 0 0 5px 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+            font-family: 'Times New Roman', serif;
+            letter-spacing: 1px;
+            color: #8b7355;
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .gallery-caption h3::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #8b7355;
+            transition: width 0.3s ease;
+        }
+
+        .gallery-caption h3:hover {
+            color: #5c4c35;
+        }
+
+        .gallery-caption h3:hover::after {
+            width: 100%;
+        }
+
+        .gallery-caption p {
+            margin: 0;
+            font-size: 0.9rem;
+            font-style: italic;
+            color: #666;
+        }
+
+        /* Updated Image Modal Styles */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(20, 20, 20, 0.95);
+            z-index: 1000;
+            padding: 40px;
+            box-sizing: border-box;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            /* Add flex display for centering */
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-image-container {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            padding: 40px;
+            background: #f4f1ea;
+            border: 2px solid #8b7355;
+            /* Center the container */
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .modal-image {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            border: 1px solid #8b7355;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            /* Center the image */
+            display: block;
+            margin: 0 auto;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            color: #f4f1ea;
+            font-size: 40px;
+            cursor: pointer;
+            background: none;
+            border: 2px solid #f4f1ea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: #f4f1ea;
+            color: #333;
+        }
+
+        .modal-caption {
+            color: #333;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+        }
+
+        /* Info Modal Redesign */
+        .modal-content {
+            background: #f4f1ea;
+            padding: 40px;
+            border: 2px solid #8b7355;
+            max-width: 800px;
+            margin: 30px auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .modal-content::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid #8b7355;
+            pointer-events: none;
+        }
+
+        .modal-content h2 {
+            color: #8b7355;
+            margin-bottom: 20px;
+            font-family: 'Times New Roman', serif;
+            letter-spacing: 1px;
+            text-align: center;
+            font-size: 2rem;
+        }
+
+        .modal-content p {
+            line-height: 1.8;
+            color: #333;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.1rem;
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+        .fade-out {
+            animation: fadeOut 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(10px); }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 30px;
+                padding: 30px;
+            }
+
+            .gallery-item img {
+                height: 250px;
+            }
+        }
+
+        /* Popup Modal Styles */
+        .summary-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .summary-modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: #f4f1ea;
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            border: 2px solid #8b7355;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+
+        .summary-modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #8b7355;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: #5c4c35;
+        }
+
+        .modal-content h2 {
+            color: #8b7355;
+            font-family: 'Times New Roman', serif;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            border-bottom: 1px solid #8b7355;
+            padding-bottom: 10px;
+        }
+
+        .modal-content p {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navigation-bar">
+        <div class="logo">The Indolence Of The Filipino</div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="works.html">Works</a></li>
+            <li><a href="analysis.html">Analysis</a></li>
+            <li><a href="gallery.html" class="active">Gallery</a></li>
+            <li><a href="resources.html">Resources</a></li>
+        </ul>
+    </nav>
+
+
+    <main class="main-content">
+        <div class="hero">
+            <h1>Visual Gallery</h1>
+            <p>A collection of historical photographs, manuscripts, and artifacts</p>
+        </div>
+
+        <section class="section">
+            <div class="gallery-grid">
+                <div class="gallery-item" data-title="Noli Me Tangere" data-summary="Noli Me Tangere is a novel by José Rizal that exposes the brutalities of Spanish colonial rule in the Philippines. The protagonist, Juan Crisóstomo Ibarra, returns home after studying in Europe with hopes of reforming his country. However, he faces immense resistance from corrupt officials and friars who seek to maintain their oppressive control. Through Ibarra's struggles, Rizal presents a powerful critique of the abuses of the Catholic Church and Spanish government. The novel ends with Ibarra being falsely accused and believed to be dead, setting up the continuation in El Filibusterismo.">
+                    <img src="../images/noli.jpg" alt="Noli Me Tangere First Edition Cover">
+                    <div class="gallery-caption">
+                        <h3>Noli Me Tangere</h3>
+                        <p>First Edition Cover, 1887</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-title="El Filibusterismo" data-summary="El Filibusterismo continues the story of Noli Me Tangere with a much darker tone. The protagonist, now known as Simoun, returns as a wealthy jeweler plotting a revolution to overthrow the Spanish regime. Unlike the idealistic Ibarra, Simoun embraces vengeance and violence as a means to achieve justice. His plan, however, fails as key characters either betray him or meet tragic fates. The novel illustrates the deepening corruption and hopelessness of reform, emphasizing the need for drastic change. Ultimately, Simoun dies in despair, symbolizing the struggle for Philippine independence.">
+                    <img src="../images/el-fili-cover.jpg" alt="El Filibusterismo First Edition">
+                    <div class="gallery-caption">
+                        <h3>El Filibusterismo</h3>
+                        <p>First Edition Cover, 1891</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-title="Mi Último Adiós" data-summary="Farewell, dear Fatherland, adored in my heart,<br>
+To die is to rest from life's wearisome part.<br>
+The colors of dawn wrap my farewell sigh,<br>
+And should it be needed, for you, I would die.<br><br>
+I go where no tyrants can bring forth their cries,<br>
+Where faith never falters, and freedom never dies.<br>
+My last breath will bless you, O my native land,<br>
+A heart ever loyal, forever will stand.">
+                    <img src="../images/last-poem.jpg" alt="Mi Último Adiós Manuscript">
+                    <div class="gallery-caption">
+                        <h3>Mi Último Adiós</h3>
+                        <p>Original Manuscript, 1896</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-title="Portrait of Teodora Alonso" data-summary="This portrait of Teodora Alonso, Rizal's mother, was painted by José Rizal himself in 1886. It showcases not only his artistic talent but also his deep affection for his mother, who played a crucial role in his education and development. The portrait was created during a particularly difficult time when his mother was facing false accusations and imprisonment.">
+                    <img src="../images/teodora.png" alt="Portrait of Teodora Alonso">
+                    <div class="gallery-caption">
+                        <h3>Portrait of Teodora Alonso</h3>
+                        <p>Painted by Rizal, 1886</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-title="Dapitan Exile" data-summary="This historical photograph shows the place of Rizal's exile in Dapitan from 1892 to 1896. During his exile, Rizal practiced medicine, engaged in agriculture, fishing, and business, taught students, and pursued scientific studies. This period proved to be one of his most productive in terms of artistic and scientific work.">
+                    <img src="../images/1347439535V3MjuntO.jpg" alt="Dapitan Exile Location">
+                    <div class="gallery-caption">
+                        <h3>Dapitan Exile</h3>
+                        <p>Historical Site, 1892-1896</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-title="Original Manuscripts" data-summary="These are pages from Rizal's original manuscripts, showing his handwriting and editorial process. The manuscripts include both literary works and scientific observations, demonstrating his meticulous attention to detail and his process of composition.">
+                    <img src="../images/manu.webp" alt="Original Manuscripts">
+                    <div class="gallery-caption">
+                        <h3>Original Manuscripts</h3>
+                        <p>Various Works, 1880s-1890s</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-title="Scientific Illustrations" data-summary="Rizal's detailed scientific illustrations of various species he discovered and studied. These drawings demonstrate his skill as a scientific illustrator and his contributions to natural history. Among these are illustrations of the Draco rizali (flying lizard), Apogania rizali (beetle), and Rhacophorus rizali (tree frog).">
+                    <img src="../images/480442_461883110518116_978635857_n.jpg" alt="Scientific Illustrations">
+                    <div class="gallery-caption">
+                        <h3>Scientific Illustrations</h3>
+                        <p>Natural History Studies, 1890s</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-title="Map of Rizal's Travels" data-summary="A detailed map showing Rizal's extensive travels across Europe, Asia, and the Americas. His journeys were crucial in shaping his perspectives on colonialism, nationalism, and social reform. The map highlights key locations and dates of his international experiences.">
+                    <img src="../images/map.png" alt="Map of Rizal's Travels">
+                    <div class="gallery-caption">
+                        <h3>Map of Rizal's Travels</h3>
+                        <p>Global Journey Documentation</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Summary Section -->
+    <div class="summary-modal" id="summaryModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalText"></p>
+        </div>
+    </div>
+
+    <!-- Image Modal -->
+    <div class="image-modal" id="imageModal">
+        <div class="modal-image-container">
+            <button class="modal-close">&times;</button>
+            <img src="" alt="" class="modal-image" id="modalImage">
+            <div class="modal-caption" id="modalImageCaption"></div>
+        </div>
+    </div>
+
+    <script>
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const modal = document.getElementById('summaryModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalText = document.getElementById('modalText');
+        const imageModal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalImageCaption = document.getElementById('modalImageCaption');
+
+        galleryItems.forEach(item => {
+            const img = item.querySelector('img');
+            const caption = item.querySelector('.gallery-caption h3').textContent;
+
+            // Image click handler
+            img.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent triggering the item click
+                modalImage.src = img.src;
+                modalImageCaption.textContent = caption;
+                imageModal.classList.add('active');
+            });
+
+            // Info click handler
+            item.addEventListener('click', () => {
+                const itemTitle = item.getAttribute('data-title');
+                const summary = item.getAttribute('data-summary');
+                modalTitle.textContent = itemTitle;
+                modalText.innerHTML = summary;
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            });
+        });
+
+        // Close image modal
+        imageModal.addEventListener('click', () => {
+            imageModal.classList.remove('active');
+        });
+
+        // Close summary modal
+        const closeBtn = document.querySelector('.close-modal');
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        });
+
+        // Close summary modal when clicking outside
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Close summary modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
+</body>
+</html>

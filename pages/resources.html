@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rizal's Legacy - Resources</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        :root {
+            --primary-color: #8b7355; /* Antique brown */
+            --accent-color: #5c4c35; /* Darker brown */
+            --bg-color: #f4f1ea; /* Vintage paper */
+            --text-color: #333333;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Times New Roman', serif; /* Serif font to match the academic style */
+            background: var(--bg-color);
+            color: var(--text-color);
+            padding-top: 60px; /* Height of the navigation bar */
+        }
+
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: var(--primary-color);
+            padding: 2rem 0;
+            color: white;
+        }
+
+        .sidebar-logo {
+            text-align: center;
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-logo h2 {
+            font-family: 'Times New Roman', serif;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            display: block;
+            transition: background 0.3s;
+        }
+
+        .nav-links li a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .hero {
+            background: #fff;
+            padding: 3rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 2px solid #8b7355;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid #8b7355;
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-family: 'Times New Roman', serif;
+            font-size: 3rem;
+            color: #8b7355;
+            letter-spacing: 1px;
+            margin: 0 0 1rem 0;
+        }
+
+        .hero p {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.2rem;
+            color: var(--text-color);
+        }
+
+        .section {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 1px solid #8b7355;
+        }
+
+        .section h2 {
+            font-family: 'Times New Roman', serif;
+            letter-spacing: 1px;
+            font-size: 2.5rem;
+            color: #8b7355;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: #8b7355;
+        }
+
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .quick-link-card {
+            background: var(--primary-color);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: transform 0.3s;
+            border: 1px solid var(--accent-color);
+        }
+
+        .quick-link-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* New Hero Section Styles */
+        .hero-section {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            background: linear-gradient(rgba(139, 115, 85, 0.7), rgba(139, 115, 85, 0.7)),
+                        url('../images/current-navigation@bkg.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            padding: 2rem;
+            max-width: 800px;
+        }
+
+        .hero-content h1 {
+            font-size: 4.5rem;
+            font-family: 'Times New Roman', serif;
+            margin-bottom: 1rem;
+            font-weight: normal;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .scroll-indicator span {
+            margin-top: 0.5rem;
+        }
+
+        /* Content Sections */
+        .content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .navigation-bar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: #f4f1ea;
+            padding: 1rem 2rem 0.5rem 0.5rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-bottom: 1px solid #8b7355;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #8b7355;
+            margin-right: 4rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: #8b7355;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            position: relative;
+        }
+
+        .nav-links li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: #8b7355;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links li a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links li a.active {
+            color: #5c4c35;
+        }
+
+        .nav-links li a.active::after {
+            width: 100%;
+        }
+
+        .nav-links li a:hover {
+            color: #5c4c35;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            color: #8b7355;
+            font-weight: normal;
+            margin-bottom: 2rem;
+        }
+
+        /* Resource Cards Styling */
+        .resource-card {
+            background: #fff;
+            border: 1px solid #8b7355;
+            padding: 30px;
+            margin-bottom: 30px;
+            position: relative;
+            /* Decorative frame corners */
+            background-image: 
+                linear-gradient(45deg, #8b7355 15px, transparent 15px),
+                linear-gradient(-45deg, #8b7355 15px, transparent 15px),
+                linear-gradient(135deg, #8b7355 15px, transparent 15px),
+                linear-gradient(-135deg, #8b7355 15px, transparent 15px);
+            background-position: top left, top right, bottom left, bottom right;
+            background-repeat: no-repeat;
+            background-size: 30px 30px;
+        }
+
+        .resource-card::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid #8b7355;
+            pointer-events: none;
+        }
+
+        .resource-link {
+            display: flex;
+            align-items: flex-start;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: inherit;
+            background: rgba(139, 115, 85, 0.05);
+            border: 1px solid #8b7355;
+            transition: all 0.3s ease;
+        }
+
+        .resource-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+            background: rgba(139, 115, 85, 0.1);
+        }
+
+        .resource-icon {
+            font-size: 2rem;
+            margin-right: 20px;
+            color: #8b7355;
+        }
+
+        .resource-details {
+            flex: 1;
+        }
+
+        .resource-title {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.4rem;
+            color: #8b7355;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .resource-description {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .resource-meta {
+            display: flex;
+            gap: 10px;
+        }
+
+        .tag {
+            background: rgba(139, 115, 85, 0.2);
+            color: #5c4c35;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 0.9rem;
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navigation-bar">
+        <div class="logo">The Indolence Of The Filipino</div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="works.html">Works</a></li>
+            <li><a href="analysis.html">Analysis</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="resources.html" class="active">Resources</a></li>
+        </ul>
+    </nav>
+
+    <script>
+        document.querySelector('.scroll-indicator').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('#content').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        });
+    </script>
+</body>
+</html> 
+        <main class="main-content">
+            <div class="hero">
+                <h1>Research Resources</h1>
+                <p>A curated collection of primary sources, scholarly articles, and related materials</p>
+            </div>
+
+            <section class="section">
+                <h2>Primary Sources</h2>
+                <div class="resource-card">
+                    <a href="https://web.seducoahuila.gob.mx/biblioweb/upload/the_indolence_of_the_filipino_by_josÃ©_rizal.pdf" class="resource-link" target="_blank">
+                        <div class="resource-icon">📚</div>
+                        <div class="resource-details">
+                            <div class="resource-title">The Indolence of the Filipino - Original Text</div>
+                            <div class="resource-description">Complete text of Rizal's essay examining the alleged laziness of Filipinos during the Spanish colonial period. A crucial primary source for understanding colonial-era social criticism.</div>
+                            <div class="resource-meta">
+                                <span class="tag">Primary Source</span>
+                                <span class="tag">Full Text</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Scholarly Articles</h2>
+                <div class="resource-card">
+                    <a href="https://pre.econ.upd.edu.ph/index.php/pre/article/viewFile/666/772" class="resource-link" target="_blank">
+                        <div class="resource-icon">📄</div>
+                        <div class="resource-details">
+                            <div class="resource-title">The Indolence of the Filipino Analysis</div>
+                            <div class="resource-description">Academic analysis providing modern economic and social context to Rizal's arguments about colonial impacts on Filipino society and productivity.</div>
+                            <div class="resource-meta">
+                                <span class="tag">Academic Paper</span>
+                                <span class="tag">Economic Analysis</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="https://www.researchgate.net/profile/Angelika-Belen-Paredes/publication/357082916_A_Critical_Paper_Summarizing_the_Life_and_Works_of_Rizal/links/61bb0a5263bbd93242985537/A-Critical-Paper-Summarizing-the-Life-and-Works-of-Rizal.pdf" class="resource-link" target="_blank">
+                        <div class="resource-icon">📝</div>
+                        <div class="resource-details">
+                            <div class="resource-title">A Critical Paper Summarizing the Life and Works of Rizal</div>
+                            <div class="resource-description">Modern academic analysis summarizing Rizal's key contributions to literature, social reform, and Philippine nationalism, with focus on his enduring influence.</div>
+                            <div class="resource-meta">
+                                <span class="tag">Critical Analysis</span>
+                                <span class="tag">Academic Research</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Combined Resources</h2>
+                <div class="resource-card">
+                    <a href="https://d1wqtxts1xzle7.cloudfront.net/75701360/Dela_Paz_Pacey_Franz_B._RIZAL_The_First_Filipino-libre.pdf?1638638774=&response-content-disposition=inline%3B+filename%3DReflection_Paper_The_First_Filipino_By_L.pdf&Expires=1740577820&Signature=Cfj90nXgtFcf69Ap5HeHpAm1KbEUl03c4ynCX7G-vSz~Pc8LCgkGXRO~sz2TDSqNlapIMZzlap~MJMQ8mIwG1RbpCaXXhawuY8XMBJHk~YVtFpaVqp2zuBhxwZ4CkV6ooQDkQO4wgkdmPd7OQhVYk~qo0bc~5nvoShxCH1iEh8wXcOqFsXiKg51RvpA8x-qUD4gIKxnPLG9DcwMWrCgK94pNk5NykpGAc2G09nGa326Gkxs~wDTNrNFW312E0bjQSSjhtUTvoI9IzHJCZjy9LU-dy9mxzElmL7Wppu2PFD~f8pYmSoHO50-AYwf8n4DnEdVHE9wnMQJ3RPqWdTateA__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA" class="resource-link" target="_blank">
+                        <div class="resource-icon">📚</div>
+                        <div class="resource-details">
+                            <div class="resource-title">The First Filipino: A Biography of Jose Rizal</div>
+                            <div class="resource-description">Comprehensive biography exploring Rizal's life, works, and impact on Philippine nationalism and reform. Includes both primary source materials and scholarly analysis.</div>
+                            <div class="resource-meta">
+                                <span class="tag">Biography</span>
+                                <span class="tag">Primary & Scholarly</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Related Websites</h2>
+                <div class="resource-card">
+                    <a href="https://www.linkedin.com/pulse/indolence-filipino-reality-philippines-nation-dash-mendoza" class="resource-link">
+                        <div class="resource-icon">🌐</div>
+                        <div class="resource-details">
+                            <div class="resource-title">The Indolence of the Filipino: The Reality of the Philippines as a Nation</div>
+                        
+                            <div class="resource-meta">
+    
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html> 

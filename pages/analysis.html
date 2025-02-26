@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Indolence of the Filipino People</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        :root {
+            --primary-color: #0038A8; /* Deep blue like NYHS */
+            --accent-color: #333333; /* Dark gray for accents */
+            --bg-color: #FFFFFF; /* White background */
+            --text-color: #333333; /* Dark gray text */
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Times New Roman', serif; /* Serif font to match the academic style */
+            background: var(--bg-color);
+            color: var(--text-color);
+            padding-top: 60px; /* Height of the navigation bar */
+        }
+
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: var(--primary-color);
+            padding: 2rem 0;
+            color: white;
+        }
+
+        .sidebar-logo {
+            text-align: center;
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-logo h2 {
+            font-family: 'Times New Roman', serif;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            display: block;
+            transition: background 0.3s;
+        }
+
+        .nav-links li a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            background: #f4f1ea; /* Vintage paper color */
+            padding: 40px;
+        }
+
+
+        .section {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: #fff;
+        }
+
+        .section h2 {
+            color: #8b7355;
+            font-family: 'Times New Roman', serif;
+            font-size: 2.5rem;
+            text-align: left;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #8b7355;
+        }
+
+        .section h2 a {
+            color: #8b7355;
+            text-decoration: none;
+            font-weight: 800;
+        }
+
+        .section h2 a:hover {
+            text-decoration: underline;
+        }
+
+        .work-card {
+            background: #fff;
+            border: 1px solid #8b7355;
+            padding: 30px;
+            margin-bottom: 30px;
+            position: relative;
+            /* Decorative frame corners */
+            background-image: 
+                linear-gradient(45deg, #8b7355 15px, transparent 15px),
+                linear-gradient(-45deg, #8b7355 15px, transparent 15px),
+                linear-gradient(135deg, #8b7355 15px, transparent 15px),
+                linear-gradient(-135deg, #8b7355 15px, transparent 15px);
+            background-position: top left, top right, bottom left, bottom right;
+            background-repeat: no-repeat;
+            background-size: 30px 30px;
+            text-align: left;
+        }
+
+        .work-card::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid #8b7355;
+            pointer-events: none;
+        }
+
+        .work-card h3 {
+            color: #8b7355;
+            font-family: 'Times New Roman', serif;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .work-meta {
+            color: #5c4c35;
+            font-style: italic;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .issue-section {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 30px;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(139, 115, 85, 0.02);
+            align-items: start;
+        }
+
+        .issue-image {
+            width: 400px;
+            height: 300px;
+            object-fit: cover;
+            border: 1px solid #8b7355;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .issue-content-wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .issue-title {
+            margin-bottom: 15px;
+        }
+
+        .issue-content {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.35rem;
+            line-height: 1.8;
+            color: #333;
+            text-align: left;
+            margin-left: 0;
+        }
+
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .quick-link-card {
+            background: var(--primary-color);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: transform 0.3s;
+            border: 1px solid var(--accent-color);
+        }
+
+        .quick-link-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* New Hero Section Styles */
+        .hero-section {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            background: linear-gradient(rgba(139, 115, 85, 0.7), rgba(139, 115, 85, 0.7)),
+                        url('../images/current-navigation@bkg.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            padding: 2rem;
+            max-width: 800px;
+        }
+
+        .hero-content h1 {
+            font-size: 4.5rem;
+            font-family: 'Times New Roman', serif;
+            margin-bottom: 1rem;
+            font-weight: normal;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .scroll-indicator span {
+            margin-top: 0.5rem;
+        }
+
+        /* Content Sections */
+        .content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .navigation-bar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: #f4f1ea;
+            padding: 1rem 2rem 0.5rem 0.5rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-bottom: 1px solid #8b7355;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #8b7355;
+            margin-right: 4rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: #8b7355;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            position: relative;
+        }
+
+        .nav-links li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: #8b7355;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links li a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links li a.active {
+            color: #5c4c35;
+        }
+
+        .nav-links li a.active::after {
+            width: 100%;
+        }
+    
+
+        .nav-links li a:hover {
+            color: #5c4c35;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            font-weight: normal;
+            margin-bottom: 2rem;
+        }
+
+        /* Analysis Cards Styling */
+        .analysis-card {
+            background: #fff;
+            border: 1px solid #8b7355;
+            padding: 30px;
+            margin-bottom: 30px;
+            position: relative;
+            /* Decorative frame corners */
+            background-image: 
+                linear-gradient(45deg, #8b7355 15px, transparent 15px),
+                linear-gradient(-45deg, #8b7355 15px, transparent 15px),
+                linear-gradient(135deg, #8b7355 15px, transparent 15px),
+                linear-gradient(-135deg, #8b7355 15px, transparent 15px);
+            background-position: top left, top right, bottom left, bottom right;
+            background-repeat: no-repeat;
+            background-size: 30px 30px;
+        }
+
+        .analysis-card::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid #8b7355;
+            pointer-events: none;
+        }
+
+        .question-header {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.4rem;
+            color: #8b7355;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #8b7355;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .key-point {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(139, 115, 85, 0.05);
+        }
+
+        .key-point h4 {
+            color: #8b7355;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .evidence-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .evidence-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+            color: #333;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .evidence-list li::before {
+            content: '•';
+            position: absolute;
+            left: 8px;
+            color: #8b7355;
+        }
+
+        .quote-block {
+            margin: 30px 0;
+            padding: 25px;
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: #8b7355;
+            text-align: center;
+            position: relative;
+            background: rgba(139, 115, 85, 0.05);
+            border-left: 3px solid #8b7355;
+            border-right: 3px solid #8b7355;
+        }
+
+        .quote-block::before,
+        .quote-block::after {
+            content: '"';
+            font-size: 3rem;
+            color: rgba(139, 115, 85, 0.2);
+            position: absolute;
+        }
+
+        .quote-block::before {
+            top: -10px;
+            left: 10px;
+        }
+
+        .quote-block::after {
+            bottom: -30px;
+            right: 10px;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: #8b7355;
+        }
+
+        .timeline-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 40px;
+            margin-bottom: 60px;
+        }
+
+        .timeline-dot {
+            width: 12px;
+            height: 12px;
+            background-color: #4B9CD3;
+            border-radius: 50%;
+            position: absolute;
+            left: 0;
+            top: 30px;
+        }
+
+        .timeline-content {
+            background: #fff;
+            padding: 40px;
+            margin-bottom: 30px;
+            position: relative;
+            /* Remove previous decorative corners */
+            background-image: none;
+        }
+
+        /* Add new frame styling */
+        .frame-container {
+            position: relative;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        /* Main border */
+        .frame-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 1px solid #8b7355;
+        }
+
+        /* Decorative corners */
+        .corner-tl, .corner-tr, .corner-bl, .corner-br {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-color: #8b7355;
+            border-style: solid;
+        }
+
+        .corner-tl {
+            top: -1px;
+            left: -1px;
+            border-width: 2px 0 0 2px;
+        }
+
+        .corner-tr {
+            top: -1px;
+            right: -1px;
+            border-width: 2px 2px 0 0;
+        }
+
+        .corner-bl {
+            bottom: -1px;
+            left: -1px;
+            border-width: 0 0 2px 2px;
+        }
+
+        .corner-br {
+            bottom: -1px;
+            right: -1px;
+            border-width: 0 2px 2px 0;
+        }
+
+        /* Update issue section styling */
+        .issue-section {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(139, 115, 85, 0.02);
+        }
+
+        .issue-title {
+            color: #8b7355;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .issue-content {
+            color: #333;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.35rem;
+            line-height: 1.8;
+            margin-left: 0;
+        }
+
+        /* Update timeline title styling */
+        .timeline-title {
+            color: #8b7355;
+            font-family: 'Times New Roman', serif;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #8b7355;
+        }
+
+        .timeline-subtitle {
+            color: #666;
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .summary-block {
+            margin-top: 30px;
+            padding: 25px;
+            background: rgba(139, 115, 85, 0.05);
+            border-left: 4px solid #8b7355;
+            text-align: left;
+        }
+
+        .summary-block p {
+            text-indent: 50px; /* Add indentation */
+            margin-bottom: 15px;
+        }
+
+        .quote {
+            font-style: italic;
+            color: #8b7355;
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            font-size: 1.2rem;
+            border-left: 3px solid #8b7355;
+            border-right: 3px solid #8b7355;
+            background: rgba(139, 115, 85, 0.05);
+        }
+
+        /* Remove any text-justify properties */
+        p, div {
+            text-align: left;
+            text-align-last: left;
+        }
+
+        /* Update the separator style */
+        .separator {
+            border-top: 1px solid rgba(139, 115, 85, 0.4); /* Made darker by increasing alpha from 0.2 to 0.4 */
+            margin: 30px 0;
+        }
+
+        /* Update the issue-content style for the summary */
+        .issue-section .issue-content.summary-text {
+            text-indent: 50px; /* Add indentation for summary */
+        }
+
+        /* Add this style to override grid layout for summary */
+        .issue-section.summary-section {
+            display: block; /* Override grid display */
+            padding: 20px;
+        }
+
+        /* Update these styles with larger font sizes */
+        .issue-content-wrapper .issue-title {
+            color: #8b7355;
+            font-family: 'Times New Roman', serif;
+            font-size: 2.1rem; /* Increased from 1.6rem */
+            margin-bottom: 20px; /* Increased margin for better spacing */
+            font-weight: bold;
+        }
+
+        .issue-content-wrapper .issue-content {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.35rem;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        /* Main introduction text */
+        .work-card > p {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.35rem;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        /* Summary text */
+        .issue-section .issue-content.summary-text {
+            font-size: 1.35rem;
+            text-indent: 50px;
+        }
+
+        .guide-questions {
+            background: rgba(139, 115, 85, 0.05);
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #8b7355;
+        }
+
+        .guide-questions h3 {
+            color: #8b7355;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .guide-questions ol {
+            padding-left: 20px;
+        }
+
+        .guide-questions li {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .analysis-content {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(139, 115, 85, 0.02);
+            border-left: 3px solid #8b7355;
+        }
+
+        .analysis-content h4 {
+            color: #8b7355;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .analysis-content p {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #333;
+            text-align: justify;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navigation-bar">
+        <div class="logo">The Indolence Of The Filipino</div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="works.html">Works</a></li>
+            <li><a href="analysis.html" class="active">Analysis</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="resources.html">Resources</a></li>
+        </ul>
+    </nav>
+
+
+    <main class="main-content">
+        <section class="section">
+            <h2><a href="#">The Indolence of the Filipino</a></h2>
+            
+            <div class="work-card">
+                <h3>A Historical Analysis of Colonial Impact</h3>
+                
+                <p>Rizal pointed out that long before the coming of the Spaniards, the Filipinos were
+                industrious and hardworking. The Spanish reign brought about a decline in economic activities
+                because of certain issues:</p>
+
+                <div class="separator"></div>
+
+                <div class="issue-section">
+                    <img src="../images/galleontrade.jpg" alt="Galleon Trade" class="issue-image">
+                    <div class="issue-content-wrapper">
+                        <h3 class="issue-title">Establishment of Galleon Trade</h3>
+                        <div class="issue-content">
+                            Cut off all previous associations of the Philippines with other countries in Asia
+                            and the Middle East. Business only conducted with Spain through Mexico. It caused
+                            business and handicraft industries gradually disappeared.
+                        </div>
+                        <div class="analysis-content">
+                            <h4>Analysis:</h4>
+                            <p>This factor directly challenges the colonial narrative by showing how Spanish policies actively suppressed existing Filipino commerce. Before colonization, Filipinos were engaged in widespread trade throughout Asia, demonstrating their natural industriousness. The Galleon Trade's restrictions weren't due to Filipino inability but rather deliberate economic control by Spain.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="separator"></div>
+
+                <div class="issue-section">
+                    <img src="../images/forcedlabor.jpg" alt="Forced Labor" class="issue-image">
+                    <div class="issue-content-wrapper">
+                        <h3 class="issue-title">Implementation of Forced Labor</h3>
+                        <div class="issue-content">
+                            Filipinos were compelled to work in shipyards, roads, and other public works,
+                            abandoning agriculture, industry, and commerce.
+                        </div>
+                        <div class="analysis-content">
+                            <h4>Analysis:</h4>
+                            <p>This system demonstrates how colonial policies directly created conditions that appeared as "indolence." The forced labor system disrupted traditional productive activities, showing that any perceived lack of industry was a direct result of Spanish colonial practices rather than inherent Filipino characteristics. This analysis reveals how structural oppression, not cultural traits, led to economic stagnation.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="separator"></div>
+
+                <div class="issue-section">
+                    <img src="../images/pirate.jpg" alt="Spanish Neglect" class="issue-image">
+                    <div class="issue-content-wrapper">
+                        <h3 class="issue-title">Spain's Neglect</h3>
+                        <div class="issue-content">
+                            Spain didn't protect the natives against foreign invaders and pirates. With
+                            no arms to defend themselves, the natives were killed and have their properties
+                            destroyed. Because of this, Filipinos were forced to become nomads, lost interest
+                            in cultivating their lands or in rebuilding the industries destroyed or shut down.
+                        </div>
+                        <div class="analysis-content">
+                            <h4>Analysis:</h4>
+                            <p>This neglect exemplifies how Spanish colonial policies undermined Filipino productivity. The lack of protection forced Filipinos to abandon their established settlements and industries, creating a cycle of displacement and economic disruption. This directly contradicts the colonial narrative of inherent indolence, as it shows how external factors prevented Filipinos from maintaining their traditional industrious practices. The situation reveals how colonial governance prioritized exploitation over development and security.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="separator"></div>
+
+                <div class="issue-section">
+                    <img src="../images/education.jpg" alt="Education System" class="issue-image">
+                    <div class="issue-content-wrapper">
+                        <h3 class="issue-title">Crooked System of Education</h3>
+                        <div class="issue-content">
+                            Only repetitive prayers and other things that could not be used by students to lead
+                            the country to progress are being taught in schools.
+                        </div>
+                        <div class="analysis-content">
+                            <h4>Analysis:</h4>
+                            <p>The limited education system represents a deliberate strategy to maintain colonial control through intellectual suppression. By restricting education to religious instruction and denying access to practical and progressive knowledge, the Spanish regime effectively prevented Filipinos from developing the skills needed for economic and social advancement. This systematic limitation of educational opportunities directly contradicts accusations of natural indolence, showing instead how colonial policies actively prevented Filipino intellectual and economic development.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="separator"></div>
+
+                <div class="issue-section">
+                    <img src="../images/gambling.jpg" alt="Gambling" class="issue-image">
+                    <div class="issue-content-wrapper">
+                        <h3 class="issue-title">Gambling</h3>
+                        <div class="issue-content">
+                            Government officials and friars were the first to engage in all sorts of bets
+                            and gambles.
+                        </div>
+                        <div class="analysis-content">
+                            <h4>Analysis:</h4>
+                            <p>The prevalence of gambling, particularly among Spanish officials and friars, demonstrates the hypocrisy of colonial moral authority. This behavior not only set a poor example but also contributed to economic instability and social degradation. Rizal uses this example to show how colonial authorities themselves introduced and normalized practices that undermined productive work ethics, while hypocritically criticizing Filipino character.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="separator"></div>
+
+                <div class="issue-section">
+                    <img src="../images/church.jpg" alt="Religion System" class="issue-image">
+                    <div class="issue-content-wrapper">
+                        <h3 class="issue-title">Religion's Crooked System</h3>
+                        <div class="issue-content">
+                            The friars taught the naïve Filipinos that it was easier for a poor man to enter
+                            heaven, and so they preferred not to work and remain poor so that they could easily
+                            enter heaven after they died.
+                        </div>
+                        <div class="analysis-content">
+                            <h4>Analysis:</h4>
+                            <p>The manipulation of religious doctrine to encourage acceptance of poverty reveals a sophisticated system of psychological control. By promoting the virtue of poverty, the colonial church discouraged economic ambition and self-improvement, effectively creating a docile workforce. This demonstrates how religious institutions were used to justify and maintain economic oppression, while simultaneously blaming the victims for their condition. The analysis shows how spiritual manipulation served colonial interests by discouraging economic initiative.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="separator"></div>
+
+                <div class="issue-section">
+                    <img src="../images/taxes.jpg" alt="High Taxes" class="issue-image">
+                    <div class="issue-content-wrapper">
+                        <h3 class="issue-title">High Taxes</h3>
+                        <div class="issue-content">
+                            The taxes were extremely high, so much so that a huge portion of what
+                            the Filipinos earned went to the government or to the friars.
+                        </div>
+                        <div class="analysis-content">
+                            <h4>Analysis:</h4>
+                            <p>The excessive taxation system created a significant economic barrier to progress and motivation. When most earnings were claimed by colonial authorities, there was little incentive for increased productivity or entrepreneurial initiative. This economic exploitation directly contradicts the narrative of Filipino indolence by showing how structural barriers prevented the accumulation of capital necessary for economic development. The analysis reveals how taxation was used as a tool of economic oppression rather than public development.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="separator"></div>
+
+                <div class="issue-section summary-section">
+                    <h3 class="issue-title">Summary</h3>
+                    <div class="issue-content summary-text">
+                        Rizal explained that Filipinos worked less because of the hot climate, which made hard labor exhausting. He said laziness was not natural to Filipinos but was caused by Spanish rule. Before the Spaniards came, Filipinos were hardworking traders with other countries. The main reasons for indolence were a lack of unity, limited education, strict economic rules, and heavy taxes. The Spanish made it hard for Filipinos to study, start businesses, or improve their lives. Rizal believed Filipinos weren't naturally lazy. If people are treated unfairly, denied education, and forced to work without reward, they will lose motivation. Indolence was a result of oppression, not choice.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
